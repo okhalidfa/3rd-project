@@ -1,11 +1,15 @@
 let currentTab = "all"
 const tac =["bg-navy", "border-navy","text-white"];
-const tina =["bg-transparent","text-slate-700","border-state-200","text-black"];
+const tina =["bg-transparent","text-slate-700","border-slate-200","text-black"];
 
-const allcon = document.getElementById("all-c")
-const incon = document.getElementById("all-c")
-const recon = document.getElementById("all-c")
-
+let allcon;
+let incon;
+let recon;
+let tos;
+let toi;
+let tor; 
+let ems;
+let avas
 function switchTab(tab){ 
     const tabs=["all", "interview", "rejected"]
      for (const y of tabs){
@@ -20,9 +24,97 @@ function switchTab(tab){
 
         }
      }
+    allcon.classList.add("hidden")
+    incon.classList.add("hidden")
+    recon.classList.add("hidden")
+    
+     if (tab === "all"){
+        allcon.classList.remove("hidden"); 
+     }
 
-      
+     else if (tab==="interview"){
+        incon.classList.remove("hidden")
+        
+        
+     }
+     else{
+        recon.classList.remove("hidden")
+        
+    }  
+
+    
+
 }
+
+// document.getElementById("job-c").addEventListener("click",function(event){
+//     const ce= event.target;
+//     const card= clickedElement.closest(".card")
+//     const status = card.equerySelector(".status")
+
+//     if (clickedElement.classList.contains("interview")){
+//         status.innertext = "Interviewed";
+//         incon.appendChild(card);
+//     }
+//     if (clickedElement.classList.contains("rejected")){
+//         status.innertext = "Rejected";
+//         incon.appendChild(card);
+//     }if (clickedElement.classList.contains("delete")){
+//         status.innertext = "interview";
+//         incon.appendChild(card);
+//     }
+
+
+// })
 document.addEventListener("DOMContentLoaded", ()=>{
+ allcon = document.getElementById("all-container")
+ incon = document.getElementById("interview-container")
+ recon = document.getElementById("rejected-container")
+ tos= document.getElementById("st")
+ toi= document.getElementById("si")
+ tor= document.getElementById("sr")
+ tos.innerText= allcon.children.length;
+ ems= document.getElementById("empty-state")
+ avas= document.getElementById("ava")
+
+ document.getElementById("job-c").addEventListener("click",function(event){
+
+    const clickedElement= event.target;
+    const card= clickedElement.closest(".card");
+    const pare= card.parentNode
+    const status = card.querySelector(".status")
+
+    if (clickedElement.classList.contains("interview")){
+
+       status.innerText = "Interviewed";
+       incon.appendChild(card);
+    }
+    if (clickedElement.classList.contains("rejected")){
+    
+         status.innerText = "Rejected";
+        recon.appendChild(card);
+    }
+    if (clickedElement.classList.contains("delete")){
+        pare.removeChild(card)
+    }
+
+updat()
+})
+
+function updat(){
+    toi.innerText=incon.children.length;
+    tor.innerText=recon.children.length;
+    const counts={
+        all: allcon.children.lenght,
+        interview: incon.children.lenght,
+        rejected: recon.children.lenght,
+    };
+    tos.innerText = counts.all;
+    toi.innerText =counts.interview;
+    tor.innerText =counts.rejected;
+    avas.innerText= counts.all
+}
+
+
     switchTab(currentTab);
 });
+
