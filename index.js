@@ -103,8 +103,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
   })
 
   function updat(){
-    // toi.innerText=incon.children.length;
-    // tor.innerText=recon.children.length;
+    toi.innerText=incon.children.length;
+    tor.innerText=recon.children.length;
     const counts={
         all: allcon.children.length,
         interview: incon.children.length,
