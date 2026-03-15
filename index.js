@@ -9,9 +9,10 @@ let tos;
 let toi;
 let tor; 
 let ems;
-let avas
+let avas;
 function switchTab(tab){ 
     const tabs=["all", "interview", "rejected"]
+    currentTab= tab;
      for (const y of tabs){
         const tabname =document.getElementById("t"+y)
         if(y===tab){
@@ -42,8 +43,7 @@ function switchTab(tab){
         
     }  
 
-    
-
+    updat();
 }
 
 // document.getElementById("job-c").addEventListener("click",function(event){
@@ -66,6 +66,7 @@ function switchTab(tab){
 
 // })
 document.addEventListener("DOMContentLoaded", ()=>{
+    
  allcon = document.getElementById("all-container")
  incon = document.getElementById("interview-container")
  recon = document.getElementById("rejected-container")
@@ -96,25 +97,36 @@ document.addEventListener("DOMContentLoaded", ()=>{
     if (clickedElement.classList.contains("delete")){
         pare.removeChild(card)
     }
+    updat();
+    switchTab(currentTab);
 
-updat()
-})
+  })
 
-function updat(){
-    toi.innerText=incon.children.length;
-    tor.innerText=recon.children.length;
+  function updat(){
+    // toi.innerText=incon.children.length;
+    // tor.innerText=recon.children.length;
     const counts={
-        all: allcon.children.lenght,
-        interview: incon.children.lenght,
-        rejected: recon.children.lenght,
+        all: allcon.children.length,
+        interview: incon.children.length,
+        rejected: recon.children.length,
     };
     tos.innerText = counts.all;
     toi.innerText =counts.interview;
     tor.innerText =counts.rejected;
-    avas.innerText= counts.all
-}
 
+    if(currentTab==="all") avas.innerText=counts.all;
+    if(currentTab==="interview") avas.innerText=counts.interview;
+    if(currentTab==="rejected") avas.innerText=counts.rejected;
+    if (counts[currentTab]<1){
+        ems.classList.remove("hidden")
+    }
+     else{
+        ems.classList.add("hidden");   
+    }
+    
+  }
+  updat();
+  switchTab(currentTab);
 
-    switchTab(currentTab);
 });
 
